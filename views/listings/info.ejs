@@ -5,7 +5,7 @@
 </script>
     <div class="info-container row">
 
-        <div class="col-9 offset-2">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 offset-lg-2 offset-md-2 offset-sm-0 offset-xs-0">
             <div class="info-title mb-3 mt-3">
                 <h1>
                     <%=data.title%>
@@ -49,9 +49,9 @@
 
     <hr>
     <%if(currUser){%>
-        <h2 class="col-8 offset-2 mb-3">Add A Review</h2>
+        <h2 class="col-lg-8 col-md-8 col-sm-12 col-xs-12 offset-lg-2 offset-md-2 offset-sm-0 offset-xs-0 mb-3">Add A Review</h2>
         <div class="row">
-            <div class="col-8 offset-2">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 offset-lg-2 offset-md-2 offset-sm-0 offset-xs-0">
                 <form method="POST" action="/listings/<%=data._id%>/reviews" class="needs-validation" novalidate>
                     <div class="mb-1">
                         <fieldset class="starability-coinFlip">
@@ -87,7 +87,7 @@
         <%}%>
             <% if(data.review.length>0){%>
                 <div class="row">
-                    <div class="col-8 offset-2">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 offset-lg-2 offset-md-2 offset-sm-0 offset-xs-0">
                         <h3>All Reviews</h3>
                         <div class="row row-cols-lg-1 row-cols-md-1 row-cols-sm-1 row-cols-xs-1">
                             <%for(reviewData of data.review){%>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                     <%}%>
-                        <div class="col-8 offset-2 mb-4">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 offset-lg-2 offset-md-2 offset-sm-0 offset-xs-0 mb-4">
                             <h3>Where you'll be</h3>
                             <div id="map"></div>
                         </div>
