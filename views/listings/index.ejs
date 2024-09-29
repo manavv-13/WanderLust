@@ -1,0 +1,147 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+  .filters{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:1.4rem;
+  }
+  .filter{
+    text-align:center;
+    color:rgb(0, 0, 0);
+    opacity:0.7;
+  }
+  .filter:hover{
+    opacity: 1;
+    cursor: pointer;
+  }
+  .toggle-container{
+    border:1px solid rgba(0,0,0,0.3);
+    padding:0.5rem 1.2rem 0.5rem 1.2rem;
+    border-radius:1rem;
+  }
+  .toggle-container:hover{
+    border:1px solid rgba(0,0,0,1);
+  }
+  .fa-sort-down{
+    opacity:0.7;
+    font-size:1rem;
+  }
+  .tax-hide{
+    display:none;
+  }
+  .hide{
+    display:none;
+  }
+</style>
+
+<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-xs-1 mt-3 navbar-expand-lg">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+    
+    <span class="navbar-toggler-icon"><i class="fa-solid fa-sort-down"></i></span>
+    <!-- <span class="navbar-toggler-icon"></span> -->
+  </button>
+  <div class="filters collapse navbar-collapse" id="navbarNavAltMarkup">
+  <div class="filter">
+    <div class="filter-i"><i class="fa-solid fa-fire-flame-curved"></i></div>
+    Trending
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-solid fa-umbrella-beach"></i></div>
+    Beach
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-solid fa-tree-city"></i></div>
+    Tree House
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-solid fa-person-shelter"></i></div>
+    Rooms
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-solid fa-person-skiing"></i></div>
+    Skiing
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-solid fa-cow"></i></div>
+    Farms
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-solid fa-mug-hot"></i></div>
+    Bed & Breakfast
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-solid fa-sailboat"></i></div>
+    BoatHouse
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-regular fa-snowflake"></i></div>
+    Arctic
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-solid fa-igloo"></i></div>
+    Domes
+  </div>
+  <div class="filter">
+    <div class="filter-i"><i class="fa-brands fa-fort-awesome"></i></div>
+    Castle
+  </div>
+  <div class="toggle-container ms-auto">
+    <div class="form-check form-check-reverse form-switch ms-auto">
+      <input class="form-check-input toggle-label" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      <label class="form-check-label toggle-button" for="flexSwitchCheckDefault">Display Tax Rates</label>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 mt-3">
+  <%for(listing of listings){%>
+    <div class="card listing-card">
+      <a href="listings/<%=listing.id%>">
+        <img src="<%=listing.image.url%>" class="card-img-top" alt="..." style="height:20rem;">
+        <div class="card-body">
+          <p class="card-text"><b>
+              <%= listing.title%>
+            </b>
+            <br>
+            <%=listing.location%>
+            <br>
+            &#8377;<%=listing.price.toLocaleString("en-IN")%>/night 
+            <i class="tax-hide">+12% GST</i>          
+          </p> 
+        </div>
+      </a>
+    </div>
+    <%}%>
+</div>
+
+<script>
+  let toggle_btn = document.getElementById("flexSwitchCheckDefault");
+  let tax = document.getElementsByClassName("tax-hide");
+  toggle_btn.addEventListener("click",()=>{
+    for(taxInfo of tax){
+      if(taxInfo.style.display==="inline"){
+      taxInfo.style.display= "none";
+    }
+    else{
+      taxInfo.style.display = "inline";
+    }
+    }
+  })
+
+  let searchInput = document.getElementById("search-bar");
+  let searchBtn = document.getElementById("search-btn");
+  let listingCard = document.getElementsByClassName("listing-card");
+  searchBtn.addEventListener("click",()=>{
+    let value = searchInput.value;
+      for(listing of listingCard){
+      let textArr = listing.innerText.split("\n");
+      if(textArr[1].toLowerCase()!==value.toLowerCase())
+      {
+        listing.classList.add("hide");
+      }
+    }
+  })
+</script>
